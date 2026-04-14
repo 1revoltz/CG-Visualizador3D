@@ -8,6 +8,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->frame, &MeuFrame::mouseMoveu, this, [this](QPoint pos){
+        QString msg = QString("Status: Pronto | Mouse: (%1, %2)").arg(pos.x()).arg(pos.y());
+        ui->statusbar->showMessage(msg);
+    });
+
     setWindowTitle("Visualizador 3D");
 
     ui->statusbar->showMessage("Status: Pronto | Nível de Zoom: 100% | Mouse: (0, 0)");

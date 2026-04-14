@@ -15,8 +15,13 @@ public:
 
     void adicionarObjeto(Objeto obj);
 
+signals:
+    void mouseMoveu(QPoint pos);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
+
+    void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
     QList<Objeto> displayFile;

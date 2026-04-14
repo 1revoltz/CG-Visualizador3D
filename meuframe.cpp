@@ -1,9 +1,12 @@
 #include "meuframe.h"
+#include <QMouseEvent>
 
 MeuFrame::MeuFrame(QWidget *parent) : QFrame(parent) {
     setFrameShape(QFrame::Box);
     setStyleSheet("background-color: #FFFFFF; border: 2px solid #A0A0A0;");
     setFixedSize(800, 600);
+
+    setMouseTracking(true);
 }
 
 void MeuFrame::adicionarObjeto(Objeto obj){
@@ -34,4 +37,9 @@ void MeuFrame::paintEvent(QPaintEvent *event){
         }
     }
 
+}
+
+void MeuFrame::mouseMoveEvent(QMouseEvent *event) {
+
+    emit mouseMoveu(event->pos());
 }
