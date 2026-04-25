@@ -17,6 +17,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+private slots:
+    void on_btnEscalar_clicked();
+
+    void on_btnRotacionar_clicked();
+
+    void on_btnTranslacao_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

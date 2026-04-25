@@ -9,11 +9,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    matriz.cpp \
     meuframe.cpp \
     objeto.cpp
 
 HEADERS += \
     mainwindow.h \
+    matriz.h \
     meuframe.h \
     objeto.h
 

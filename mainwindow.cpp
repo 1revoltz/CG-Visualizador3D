@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "objeto.h"
+#include "matriz.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,8 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     setWindowTitle("Visualizador 3D");
-
-    ui->statusbar->showMessage("Status: Pronto | Nível de Zoom: 100% | Mouse: (0, 0)");
 
     // TESTES
 
@@ -45,4 +44,70 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+
+void MainWindow::on_btnTranslacao_clicked()
+{
+    int index = ui->listWidget->currentRow();
+
+    Objeto* obj = ui->frame->getObjeto(index);
+
+    if (!obj) return;
+
+    double dx = ui->editX->text().toDouble();
+    double dy = ui->editY->text().toDouble();
+
+    Matriz m = Matriz::translacao(dx, dy);
+    obj->transformar(m);
+
+    ui->frame->update();
+}
+
+void MainWindow::on_btnEscalar_clicked()
+{
+    int index = ui->listWidget->currentRow();
+
+    Objeto* obj = ui->frame->getObjeto(index);
+    if (!obj) return;
+
+    double sx = ui->editEscalaX->text().toDouble();
+    double sy = ui->editEscalaY->text().toDouble();
+
+    QPoint centro = obj->getCentroide();
+
+    Matriz tIda = Matriz::translacao(-centro.x(), -centro.y());
+    Matriz esc = Matriz::escala(sx, sy);
+    Matriz tVolta = Matriz::translacao(centro.x(), centro.y());
+
+    Matriz final = tVolta * esc * tIda;
+
+    obj->transformar(final);
+    ui->frame->update();
+}
+
+void MainWindow::on_btnRotacionar_clicked()
+{
+    int index = ui->listWidget->currentRow();
+
+    Objeto* obj = ui->frame->getObjeto(index);
+    if (!obj) return;
+
+    double angulo = ui->editAngulo->text().toDouble();
+
+    QPoint pivot;
+
+    if (ui->radioCentroide->isChecked()) {
+        pivot = obj->getCentroide();
+    } else {
+        pivot = QPoint(ui->editPivotX->text().toInt(), ui->editPivotY->text().toInt());
+    }
+
+    Matriz tIda = Matriz::translacao(-pivot.x(), -pivot.y());
+    Matriz rot = Matriz::rotacao(angulo);
+    Matriz tVolta = Matriz::translacao(pivot.x(), pivot.y());
+
+    obj->transformar(tVolta * rot * tIda);
+    ui->frame->update();
 }

@@ -43,3 +43,10 @@ void MeuFrame::mouseMoveEvent(QMouseEvent *event) {
 
     emit mouseMoveu(event->pos());
 }
+
+Objeto* MeuFrame::getObjeto(int index) {
+    if (index >= 0 && index < displayFile.size()) {
+        return &displayFile[index];
+    }
+    return nullptr;
+}

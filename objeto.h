@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 #include <QPoint>
+#include "matriz.h"
 
 class Objeto {
 public:
@@ -19,6 +20,10 @@ public:
     QString nome;
     Tipo tipo;
     QList<QPoint> pontos;
+
+    QPoint getCentroide() const;
+
+    void transformar(const Matriz& m);
 };
 
 #endif // OBJETO_H

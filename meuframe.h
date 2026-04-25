@@ -15,12 +15,13 @@ public:
 
     void adicionarObjeto(Objeto obj);
 
+    Objeto* getObjeto(int index);
+
 signals:
     void mouseMoveu(QPoint pos);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
-
     void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
