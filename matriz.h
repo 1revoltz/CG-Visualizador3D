@@ -4,15 +4,16 @@
 #include <QPoint>
 #include <cmath>
 
-class Matriz {
+class Matriz
+{
 public:
     double m[3][3];
 
     Matriz();
 
-    Matriz operator*(const Matriz& outro) const;
+    Matriz operator*(const Matriz &outro) const;
 
-    QPoint operator*(const QPoint& p) const;
+    QPoint operator*(const QPoint &p) const;
 
     static Matriz translacao(double dx, double dy);
     static Matriz escala(double sx, double sy);

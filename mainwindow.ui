@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1369</width>
-    <height>720</height>
+    <width>1254</width>
+    <height>1308</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="MeuFrame" name="frame">
       <property name="frameShape">
@@ -32,8 +32,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1369</width>
-     <height>21</height>
+     <width>1254</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -42,7 +42,7 @@
    <property name="minimumSize">
     <size>
      <width>150</width>
-     <height>34</height>
+     <height>38</height>
     </size>
    </property>
    <property name="windowTitle">
@@ -78,156 +78,278 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_2">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>151</width>
-       <height>161</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Translação</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>X:</string>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="enabled">
+         <bool>true</bool>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editX"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Y:</string>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-132</y>
+          <width>209</width>
+          <height>1344</height>
+         </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Translação</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editY"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnTranslacao">
+              <property name="text">
+               <string>Transladar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Escalonamento</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaY"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnEscalar">
+              <property name="text">
+               <string>Escalar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="title">
+            <string>Rotação</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Angulo:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editAngulo"/>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioCentroide">
+              <property name="text">
+               <string>Girar no centroide</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_2">
+              <property name="text">
+               <string>Girar em ponto fixo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotY"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnRotacionar">
+              <property name="text">
+               <string>Rotacionar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="title">
+            <string>Controles da Window</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QPushButton" name="btnWinCima">
+              <property name="text">
+               <string>Cima</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinBaixo">
+              <property name="text">
+               <string>Baixo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinDireita">
+              <property name="text">
+               <string>DIreita</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinEsquerda">
+              <property name="text">
+               <string>Esquerda</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnZoomIn">
+              <property name="text">
+               <string>Zoom IN</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnZoomOut">
+              <property name="text">
+               <string>Zoom Out</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_5">
+           <property name="title">
+            <string>Controles de Viewport</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>X min</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Y min</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox_2">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>X max</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox_3">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Y max</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBox_4">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editY"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnTranslacao">
-        <property name="text">
-         <string>Transladar</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>190</y>
-       <width>151</width>
-       <height>161</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Escalonamento</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>X:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editEscalaX"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Y:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editEscalaY"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnEscalar">
-        <property name="text">
-         <string>Escalar</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>370</y>
-       <width>151</width>
-       <height>271</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Rotação</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Angulo:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editAngulo"/>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioCentroide">
-        <property name="text">
-         <string>Girar no centroide</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_2">
-        <property name="text">
-         <string>Girar em ponto fixo</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>X:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editPivotX"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Y:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="editPivotY"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnRotacionar">
-        <property name="text">
-         <string>Rotacionar</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

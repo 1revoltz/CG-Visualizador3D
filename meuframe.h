@@ -2,12 +2,13 @@
 #define MEUFRAME_H
 
 #include <QFrame>
+#include <QList>
 #include <QPaintEvent>
 #include <QPainter>
-#include <QList>
 #include "objeto.h"
 
-class MeuFrame : public QFrame {
+class MeuFrame : public QFrame
+{
     Q_OBJECT
 
 public:
@@ -15,7 +16,11 @@ public:
 
     void adicionarObjeto(Objeto obj);
 
-    Objeto* getObjeto(int index);
+    Objeto *getObjeto(int index);
+
+    double wXmin, wXmax, wYmin, wYmax;
+
+    int vpXmin, vpXmax, vpYmin, vpYmax;
 
 signals:
     void mouseMoveu(QPoint pos);
@@ -26,6 +31,7 @@ protected:
 
 private:
     QList<Objeto> displayFile;
+    QPoint mundoParaTela(QPoint ptMundo);
 };
 
 #endif // MEUFRAME_H

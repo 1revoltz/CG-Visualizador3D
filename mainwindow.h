@@ -24,6 +24,17 @@ private slots:
 
     void on_btnTranslacao_clicked();
 
+    void on_spinBox_valueChanged(int arg1);   // X min
+    void on_spinBox_2_valueChanged(int arg1); // Y min
+    void on_spinBox_3_valueChanged(int arg1); // X max
+    void on_spinBox_4_valueChanged(int arg1); // Y max
+
+    void on_btnWinCima_clicked();
+    void on_btnWinBaixo_clicked();
+    void on_btnWinDireita_clicked();
+    void on_btnWinEsquerda_clicked();
+    void on_btnZoomIn_clicked();
+    void on_btnZoomOut_clicked();
 private:
     Ui::MainWindow *ui;
 };
