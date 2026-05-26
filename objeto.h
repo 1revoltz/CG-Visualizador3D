@@ -9,16 +9,13 @@
 class Objeto
 {
 public:
-    enum Tipo { PONTO, RETA, POLIGONO };
-
-    Objeto(QString nome, Tipo tipo, QList<QPoint> pontos);
-
     QString nome;
-    Tipo tipo;
-    QList<QPoint> pontos;
+    QList<QList<QPointF>> faces;
 
-    QPoint getCentroide() const;
+    Objeto(QString nome);
 
+    void addFace(QList<QPointF> pontosDaFace);
+    QPointF getCentroide() const;
     void transformar(const Matriz &m);
 };
 

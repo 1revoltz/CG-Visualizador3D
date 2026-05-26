@@ -20,29 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle("Visualizador 3D");
 
-    // TESTES
+    criarCasinha(100, 100, "Casa 1");
+    criarCasinha(300, 200, "Casa 2");
+    criarCasinha(550, 50, "Casa 3");
 
-    // TESTE PONTO
-    QList<QPoint> coordsPonto = {QPoint(50, 50)};
-    Objeto meuPonto("Ponto A", Objeto::PONTO, coordsPonto);
-
-    // TESTE RETA
-    QList<QPoint> coordsReta = {QPoint(100, 100), QPoint(300, 200)};
-    Objeto minhaReta("Reta B", Objeto::RETA, coordsReta);
-
-    // TESTE POLIGONO(TRIANGULO)
-    QList<QPoint> coordsTriangulo = {QPoint(400, 400), QPoint(600, 400), QPoint(500, 200)};
-    Objeto meuTriangulo("Triângulo C", Objeto::POLIGONO, coordsTriangulo);
-
-    // Mandando os objetos para o Display File dentro do MeuFrame
-    ui->frame->adicionarObjeto(meuPonto);
-    ui->frame->adicionarObjeto(minhaReta);
-    ui->frame->adicionarObjeto(meuTriangulo);
-
-    //preencher a lista de objetos
-    ui->listWidget->addItem(meuPonto.nome);
-    ui->listWidget->addItem(minhaReta.nome);
-    ui->listWidget->addItem(meuTriangulo.nome);
 }
 
 MainWindow::~MainWindow()
@@ -79,7 +60,7 @@ void MainWindow::on_btnEscalar_clicked()
     double sx = ui->editEscalaX->text().toDouble();
     double sy = ui->editEscalaY->text().toDouble();
 
-    QPoint centro = obj->getCentroide();
+    QPointF centro = obj->getCentroide();
 
     Matriz tIda = Matriz::translacao(-centro.x(), -centro.y());
     Matriz esc = Matriz::escala(sx, sy);
@@ -126,7 +107,7 @@ void MainWindow::on_btnRotacionar_clicked()
 
     double angulo = ui->editAngulo->text().toDouble();
 
-    QPoint pivot;
+    QPointF pivot;
 
     if (ui->radioCentroide->isChecked()) {
         pivot = obj->getCentroide();
@@ -198,4 +179,23 @@ void MainWindow::on_btnZoomOut_clicked()
     ui->frame->wYmin -= zoom;
     ui->frame->wYmax += zoom;
     ui->frame->update();
+}
+
+void MainWindow::criarCasinha(double x, double y, QString nomeCasa)
+{
+    Objeto casa(nomeCasa);
+
+    //define as partes
+    QList<QPointF> base = {QPoint(x, y), QPoint(x + 100, y), QPoint(x + 100, y + 100), QPoint(x, y + 100)};
+    QList<QPointF> teto = {QPoint(x, y + 100), QPoint(x + 100, y + 100), QPoint(x + 50, y + 150)};
+    QList<QPointF> porta = {QPoint(x + 20, y), QPoint(x + 50, y), QPoint(x + 50, y + 60), QPoint(x + 20, y + 60)};
+
+    //adiciona as partes para dentro do obj
+    casa.addFace(base);
+    casa.addFace(teto);
+    casa.addFace(porta);
+
+    //manda pro Frame
+    ui->frame->adicionarObjeto(casa);
+    ui->listWidget->addItem(casa.nome);
 }

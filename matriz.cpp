@@ -22,11 +22,11 @@ Matriz Matriz::operator*(const Matriz &outro) const
     return res;
 }
 
-QPoint Matriz::operator*(const QPoint &p) const
+QPointF Matriz::operator*(const QPointF &p) const
 {
     double nx = m[0][0] * p.x() + m[0][1] * p.y() + m[0][2] * 1;
     double ny = m[1][0] * p.x() + m[1][1] * p.y() + m[1][2] * 1;
-    return QPoint(round(nx), round(ny));
+    return QPointF(nx, ny);
 }
 
 Matriz Matriz::translacao(double dx, double dy)

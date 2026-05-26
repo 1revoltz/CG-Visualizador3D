@@ -15,20 +15,13 @@ MeuFrame::MeuFrame(QWidget *parent)
     wXmax = 800.0;
     wYmax = 600.0;
 
-    vpXmin = 0;
-    vpYmin = 0;
-    vpXmax = 800;
-    vpYmax = 600;
+    vpXmin = 50;
+    vpYmin = 50;
+    vpXmax = 750;
+    vpYmax = 550;
 }
 
 void MeuFrame::adicionarObjeto(Objeto obj){
-
-    for (int i = 0; i < obj.pontos.size(); i++) {
-        int novoX = obj.pontos[i].x() * 2;
-        int novoY = obj.pontos[i].y() * 2;
-        obj.pontos[i] = QPoint(novoX, novoY);
-    }
-
     displayFile.append(obj);
     update();
 }
@@ -44,24 +37,35 @@ void MeuFrame::paintEvent(QPaintEvent *event)
     pen.setWidth(2);
     painter.setPen(pen);
 
+    painter.drawRect(vpXmin, vpYmin, vpXmax - vpXmin, vpYmax - vpYmin);
+
     for(int i = 0; i < displayFile.size(); i++){
         Objeto obj = displayFile[i];
 
-        // 1. Criamos uma lista temporária para guardar os pontos convertidos
-        QList<QPoint> ptsTela;
-        for (int j = 0; j < obj.pontos.size(); j++) {
-            ptsTela.append(mundoParaTela(obj.pontos[j]));
-        }
+        for(int f = 0; f < obj.faces.size(); f++) {
 
-        // 2. Desenhamos usando a lista 'ptsTela' em vez de 'obj.pontos'
-        if(obj.tipo == Objeto::PONTO){
-            painter.drawPoint(ptsTela[0]);
-        }
-        else if(obj.tipo == Objeto::RETA){
-            painter.drawLine(ptsTela[0], ptsTela[1]);
-        }
-        else if(obj.tipo == Objeto::POLIGONO){
-            painter.drawPolygon(ptsTela.data(), ptsTela.size());
+            int numPontos = obj.faces[f].size();
+
+            //tratamento especial para pontos soltos
+            if(numPontos == 1) {
+                QPointF p = obj.faces[f][0];
+                if(calcularCodigo(p) == INSIDE) {
+                    painter.drawPoint(mundoParaTela(p));
+                }
+                continue;
+            }
+
+            for(int j = 0; j < numPontos; j++){
+
+                QPointF p1_mundo = obj.faces[f][j];
+                QPointF p2_mundo = obj.faces[f][(j + 1) % numPontos];
+
+                if (cohenSutherlandClip(p1_mundo, p2_mundo)) {
+                    QPoint p1_tela = mundoParaTela(p1_mundo);
+                    QPoint p2_tela = mundoParaTela(p2_mundo);
+                    painter.drawLine(p1_tela, p2_tela);
+                }
+            }
         }
     }
 }
@@ -80,7 +84,7 @@ Objeto *MeuFrame::getObjeto(int index)
     return nullptr;
 }
 
-QPoint MeuFrame::mundoParaTela(QPoint ptMundo) {
+QPoint MeuFrame::mundoParaTela(QPointF ptMundo) {
     double xw = ptMundo.x();
     double yw = ptMundo.y();
 
@@ -96,4 +100,68 @@ QPoint MeuFrame::mundoParaTela(QPoint ptMundo) {
 
     // Retorna o ponto convertido arredondado para inteiros (pixels)
     return QPoint(std::round(xvp), std::round(yvp));
+}
+
+//diz onde o ponto esta em relação a WINDOW
+int MeuFrame::calcularCodigo(QPointF p) {
+    int code = INSIDE;
+
+    if (p.x() < wXmin) code |= LEFT;      //ativa bit da esquerda
+    else if (p.x() > wXmax) code |= RIGHT; //ativa bit da direita
+
+    if (p.y() < wYmin) code |= BOTTOM;    //ativa bit de baixo
+    else if (p.y() > wYmax) code |= TOP;   //ativa bit de cima
+
+    return code;
+}
+
+bool MeuFrame::cohenSutherlandClip(QPointF &p1, QPointF &p2) {
+    int code1 = calcularCodigo(p1);
+    int code2 = calcularCodigo(p2);
+    bool aceito = false;
+
+    while (true) {
+        if (!(code1 | code2)) {
+            //a linha esta totalmente dentro 0000
+            aceito = true;
+            break;
+        } else if (code1 & code2) {
+            //ambos os pontos compartilham uma mesma zona externa, totalmente fora
+            break;
+        } else {
+            //linha cruza alguma borda
+            int codeOut;
+            double x, y;
+
+            //escolhendo o ponto que esta fora
+            if (code1 != INSIDE) codeOut = code1;
+            else codeOut = code2;
+
+            if (codeOut & TOP) {           //ponto esta acima da Window
+                x = p1.x() + (p2.x() - p1.x()) * (wYmax - p1.y()) / (p2.y() - p1.y());
+                y = wYmax;
+            } else if (codeOut & BOTTOM) { //ponto esta abaixo da Window
+                x = p1.x() + (p2.x() - p1.x()) * (wYmin - p1.y()) / (p2.y() - p1.y());
+                y = wYmin;
+            } else if (codeOut & RIGHT) {  //ponto esta a direita
+                y = p1.y() + (p2.y() - p1.y()) * (wXmax - p1.x()) / (p2.x() - p1.x());
+                x = wXmax;
+            } else if (codeOut & LEFT) {   //ponto esta a esquerda
+                y = p1.y() + (p2.y() - p1.y()) * (wXmin - p1.x()) / (p2.x() - p1.x());
+                x = wXmin;
+            }
+
+            //atualizamos o ponto que estava fora com as novas coordenadas do corte
+            if (codeOut == code1) {
+                p1.setX(x);
+                p1.setY(y);
+                code1 = calcularCodigo(p1); //recalculamos o codigo para ver se ele entrou
+            } else {
+                p2.setX(x);
+                p2.setY(y);
+                code2 = calcularCodigo(p2); //recalculamos o codigo do segundo ponto
+            }
+        }
+    }
+    return aceito; //se aceito=true, desenhamos a reta (p1->p2)
 }

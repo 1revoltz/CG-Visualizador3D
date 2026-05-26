@@ -13,7 +13,7 @@ public:
 
     Matriz operator*(const Matriz &outro) const;
 
-    QPoint operator*(const QPoint &p) const;
+    QPointF operator*(const QPointF &p) const;
 
     static Matriz translacao(double dx, double dy);
     static Matriz escala(double sx, double sy);

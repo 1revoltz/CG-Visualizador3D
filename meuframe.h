@@ -12,6 +12,13 @@ class MeuFrame : public QFrame
     Q_OBJECT
 
 public:
+    //zonas
+    static const int INSIDE = 0; // 0000
+    static const int LEFT = 1;   // 0001
+    static const int RIGHT = 2;  // 0010
+    static const int BOTTOM = 4; // 0100
+    static const int TOP = 8;    // 1000
+
     explicit MeuFrame(QWidget *parent = nullptr);
 
     void adicionarObjeto(Objeto obj);
@@ -31,7 +38,11 @@ protected:
 
 private:
     QList<Objeto> displayFile;
-    QPoint mundoParaTela(QPoint ptMundo);
+    QPoint mundoParaTela(QPointF ptMundo);
+
+    //clipping
+    int calcularCodigo(QPointF p);
+    bool cohenSutherlandClip(QPointF &p1, QPointF &p2);
 };
 
 #endif // MEUFRAME_H

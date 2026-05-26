@@ -1,32 +1,39 @@
 #include "objeto.h"
 
-Objeto::Objeto(QString nome, Tipo tipo, QList<QPoint> pontos)
+Objeto::Objeto(QString nome)
 {
     this->nome = nome;
-    this->tipo = tipo;
-    this->pontos = pontos;
 }
 
-QPoint Objeto::getCentroide() const
+void Objeto::addFace(QList<QPointF> pontosDaFace)
 {
-    if (pontos.isEmpty())
-        return QPoint(0, 0);
+    faces.append(pontosDaFace);
+}
 
+QPointF Objeto::getCentroide() const
+{
     double somaX = 0;
     double somaY = 0;
+    int totalPontos = 0;
 
-    for (const QPoint &p : pontos) {
-        somaX += p.x();
-        somaY += p.y();
+    for (const auto &face : faces) {
+        for (const QPointF &p : face) {
+            somaX += p.x();
+            somaY += p.y();
+            totalPontos++;
+        }
     }
 
-    // media das cordenadas
-    return QPoint(round(somaX / pontos.size()), round(somaY / pontos.size()));
+    if (totalPontos == 0) return QPointF(0, 0);
+
+    return QPointF(somaX / totalPontos, somaY / totalPontos);
 }
 
 void Objeto::transformar(const Matriz &m)
 {
-    for (int i = 0; i < pontos.size(); ++i) {
-        pontos[i] = m * pontos[i];
+    for (int i = 0; i < faces.size(); ++i) {
+        for (int j = 0; j < faces[i].size(); ++j) {
+            faces[i][j] = m * faces[i][j];
+        }
     }
 }

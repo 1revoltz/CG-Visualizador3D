@@ -37,5 +37,6 @@ private slots:
     void on_btnZoomOut_clicked();
 private:
     Ui::MainWindow *ui;
+    void criarCasinha(double x, double y, QString nomeCasa);
 };
 #endif // MAINWINDOW_H
