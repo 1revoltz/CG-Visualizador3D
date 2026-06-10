@@ -26,6 +26,44 @@ void MeuFrame::adicionarObjeto(Objeto obj){
     update();
 }
 
+void MeuFrame::setVistaOrtogonal(VistaOrtogonal vista)
+{
+    vistaOrtogonal = vista;
+
+    switch (vistaOrtogonal) {
+    case VistaOrtogonal::SuperiorXZ:
+        matrizProjecao = Matriz::projecaoOrtogonalXZ();
+        break;
+    case VistaOrtogonal::LateralZY:
+        matrizProjecao = Matriz::projecaoOrtogonalZY();
+        break;
+    default:
+        matrizProjecao = Matriz::projecaoOrtogonalXY();
+        break;
+    }
+
+    update();
+}
+
+QPointF MeuFrame::projetarOrtogonal(const QVector3D &ponto) const
+{
+    QVector3D deslocamento;
+
+    switch (vistaOrtogonal) {
+    case VistaOrtogonal::SuperiorXZ:
+        deslocamento = QVector3D(0.0, (wYmin + wYmax) / 2.0, 0.0);
+        break;
+    case VistaOrtogonal::LateralZY:
+        deslocamento = QVector3D((wXmin + wXmax) / 2.0, 0.0, 0.0);
+        break;
+    default:
+        break;
+    }
+
+    const QVector3D projetado = matrizProjecao * ponto + deslocamento;
+    return QPointF(projetado.x(), projetado.y());
+}
+
 
 void MeuFrame::paintEvent(QPaintEvent *event)
 {
@@ -40,15 +78,15 @@ void MeuFrame::paintEvent(QPaintEvent *event)
     painter.drawRect(vpXmin, vpYmin, vpXmax - vpXmin, vpYmax - vpYmin);
 
     for(int i = 0; i < displayFile.size(); i++){
-        Objeto obj = displayFile[i];
+        const Objeto &obj = displayFile[i];
 
         for(int f = 0; f < obj.faces.size(); f++) {
 
             int numPontos = obj.faces[f].size();
 
-            //tratamento especial para pontos soltos
+            // Tratamento especial para pontos soltos (adaptado para QVector3D)
             if(numPontos == 1) {
-                QPointF p = obj.faces[f][0];
+                const QPointF p = projetarOrtogonal(obj.faces[f][0]);
                 if(calcularCodigo(p) == INSIDE) {
                     painter.drawPoint(mundoParaTela(p));
                 }
@@ -57,8 +95,9 @@ void MeuFrame::paintEvent(QPaintEvent *event)
 
             for(int j = 0; j < numPontos; j++){
 
-                QPointF p1_mundo = obj.faces[f][j];
-                QPointF p2_mundo = obj.faces[f][(j + 1) % numPontos];
+                // Dentro do laço de renderização - Conforme a imagem
+                QPointF p1_mundo = projetarOrtogonal(obj.faces[f][j]);
+                QPointF p2_mundo = projetarOrtogonal(obj.faces[f][(j + 1) % numPontos]);
 
                 if (cohenSutherlandClip(p1_mundo, p2_mundo)) {
                     QPoint p1_tela = mundoParaTela(p1_mundo);

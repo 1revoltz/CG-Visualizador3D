@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QVector3D>
+
+#include "objeto.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,8 +38,18 @@ private slots:
     void on_btnWinEsquerda_clicked();
     void on_btnZoomIn_clicked();
     void on_btnZoomOut_clicked();
+    void on_btnCarregarObj_clicked();
+    void on_comboProjecao_currentIndexChanged(int index);
 private:
     Ui::MainWindow *ui;
     void criarCasinha(double x, double y, QString nomeCasa);
+    void carregarPokemon(const QString &nomeArquivo,
+                         const QString &nomeObjeto,
+                         const QVector3D &posicao,
+                         double altura);
+    void ajustarModeloParaCena(Objeto &objeto,
+                               const QVector3D &posicao,
+                               double altura);
+    QString localizarArquivoDoProjeto(const QString &nomeArquivo) const;
 };
 #endif // MAINWINDOW_H

@@ -5,29 +5,32 @@ Objeto::Objeto(QString nome)
     this->nome = nome;
 }
 
-void Objeto::addFace(QList<QPointF> pontosDaFace)
+
+void Objeto::addFace(QList<QVector3D> pontosDaFace)
 {
     faces.append(pontosDaFace);
 }
 
-QPointF Objeto::getCentroide() const
+
+QVector3D Objeto::getCentroide() const
 {
-    double somaX = 0;
-    double somaY = 0;
+    double somaX = 0, somaY = 0, somaZ = 0;
     int totalPontos = 0;
 
     for (const auto &face : faces) {
-        for (const QPointF &p : face) {
+        for (const QVector3D &p : face) {
             somaX += p.x();
             somaY += p.y();
+            somaZ += p.z();
             totalPontos++;
         }
     }
 
-    if (totalPontos == 0) return QPointF(0, 0);
+    if (totalPontos == 0) return QVector3D(0, 0, 0);
 
-    return QPointF(somaX / totalPontos, somaY / totalPontos);
+    return QVector3D(somaX / totalPontos, somaY / totalPontos, somaZ / totalPontos);
 }
+
 
 void Objeto::transformar(const Matriz &m)
 {

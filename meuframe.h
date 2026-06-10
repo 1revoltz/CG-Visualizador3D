@@ -12,6 +12,12 @@ class MeuFrame : public QFrame
     Q_OBJECT
 
 public:
+    enum class VistaOrtogonal {
+        FrontalXY,
+        SuperiorXZ,
+        LateralZY
+    };
+
     //zonas
     static const int INSIDE = 0; // 0000
     static const int LEFT = 1;   // 0001
@@ -24,6 +30,7 @@ public:
     void adicionarObjeto(Objeto obj);
 
     Objeto *getObjeto(int index);
+    void setVistaOrtogonal(VistaOrtogonal vista);
 
     double wXmin, wXmax, wYmin, wYmax;
 
@@ -38,6 +45,9 @@ protected:
 
 private:
     QList<Objeto> displayFile;
+    VistaOrtogonal vistaOrtogonal = VistaOrtogonal::FrontalXY;
+    Matriz matrizProjecao = Matriz::projecaoOrtogonalXY();
+    QPointF projetarOrtogonal(const QVector3D &ponto) const;
     QPoint mundoParaTela(QPointF ptMundo);
 
     //clipping

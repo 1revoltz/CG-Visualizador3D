@@ -1,0 +1,14 @@
+# Configurações locais do Qt Creator
+*.user
+*.user.*
+
+# Pastas de Build (Compilação) e binários
+build-*/
+*.o
+*.obj
+Makefile*
+
+# Arquivos gerados automaticamente pelo Qt (MOC e UI)
+moc_*.cpp
+ui_*.h
+qrc_*.cpp

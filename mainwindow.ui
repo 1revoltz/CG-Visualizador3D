@@ -52,14 +52,27 @@
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
-    <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="listWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>10</y>
        <width>131</width>
-       <height>530</height>
+       <height>490</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnCarregarObj">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>510</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Carregar OBJ</string>
      </property>
     </widget>
    </widget>
@@ -124,6 +137,16 @@
              <widget class="QLineEdit" name="editY"/>
             </item>
             <item>
+             <widget class="QLabel" name="labelTranslacaoZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editZ"/>
+            </item>
+            <item>
              <widget class="QPushButton" name="btnTranslacao">
               <property name="text">
                <string>Transladar</string>
@@ -160,6 +183,16 @@
              <widget class="QLineEdit" name="editEscalaY"/>
             </item>
             <item>
+             <widget class="QLabel" name="labelEscalaZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaZ"/>
+            </item>
+            <item>
              <widget class="QPushButton" name="btnEscalar">
               <property name="text">
                <string>Escalar</string>
@@ -184,6 +217,32 @@
             </item>
             <item>
              <widget class="QLineEdit" name="editAngulo"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelEixoRotacao">
+              <property name="text">
+               <string>Eixo de rotação:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboEixoRotacao">
+              <item>
+               <property name="text">
+                <string>X</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Y</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Z</string>
+               </property>
+              </item>
+             </widget>
             </item>
             <item>
              <widget class="QRadioButton" name="radioCentroide">
@@ -218,6 +277,16 @@
             </item>
             <item>
              <widget class="QLineEdit" name="editPivotY"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelPivotZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotZ"/>
             </item>
             <item>
              <widget class="QPushButton" name="btnRotacionar">
@@ -275,6 +344,41 @@
               <property name="text">
                <string>Zoom Out</string>
               </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxProjecao">
+           <property name="title">
+            <string>Projeção Ortogonal</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutProjecao">
+            <item>
+             <widget class="QLabel" name="labelProjecao">
+              <property name="text">
+               <string>Plano de visualização:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboProjecao">
+              <item>
+               <property name="text">
+                <string>Frontal (XY)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Superior (XZ)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lateral (ZY)</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
