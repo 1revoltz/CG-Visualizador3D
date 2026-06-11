@@ -93,15 +93,10 @@ Matriz Matriz::projecaoOrtogonalXY()
 Matriz Matriz::projecaoOrtogonalXZ()
 {
     Matriz res;
-    res.m[0][0] = 1.0;
-    res.m[0][1] = 0.0;
-    res.m[0][2] = 0.0;
-    res.m[1][0] = 0.0;
     res.m[1][1] = 0.0;
     res.m[1][2] = 1.0;
-    res.m[2][0] = 0.0;
-    res.m[2][1] = 0.0;
     res.m[2][2] = 0.0;
+    res.m[3][3] = 1.0;
     return res;
 }
 
@@ -109,13 +104,8 @@ Matriz Matriz::projecaoOrtogonalZY()
 {
     Matriz res;
     res.m[0][0] = 0.0;
-    res.m[0][1] = 0.0;
     res.m[0][2] = 1.0;
-    res.m[1][0] = 0.0;
-    res.m[1][1] = 1.0;
-    res.m[1][2] = 0.0;
-    res.m[2][0] = 0.0;
-    res.m[2][1] = 0.0;
     res.m[2][2] = 0.0;
+    res.m[3][3] = 1.0;
     return res;
 }

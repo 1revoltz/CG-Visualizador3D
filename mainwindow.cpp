@@ -101,41 +101,51 @@ QString MainWindow::localizarArquivoDoProjeto(const QString &nomeArquivo) const
     return QString();
 }
 
-void MainWindow::ajustarModeloParaCena(Objeto &objeto,
-                                       const QVector3D &posicao,
-                                       double altura)
+void MainWindow::ajustarModeloParaCena(Objeto &objeto, const QVector3D &posicaoDestino, double alturaDesejada)
 {
-    QVector3D minimo(std::numeric_limits<float>::max(),
-                     std::numeric_limits<float>::max(),
-                     std::numeric_limits<float>::max());
-    QVector3D maximo(std::numeric_limits<float>::lowest(),
-                     std::numeric_limits<float>::lowest(),
-                     std::numeric_limits<float>::lowest());
+    if (objeto.faces.isEmpty()) return;
 
-    for (const QList<QVector3D> &face : objeto.faces) {
-        for (const QVector3D &ponto : face) {
-            minimo.setX(std::min(minimo.x(), ponto.x()));
-            minimo.setY(std::min(minimo.y(), ponto.y()));
-            minimo.setZ(std::min(minimo.z(), ponto.z()));
-            maximo.setX(std::max(maximo.x(), ponto.x()));
-            maximo.setY(std::max(maximo.y(), ponto.y()));
-            maximo.setZ(std::max(maximo.z(), ponto.z()));
+    // 1. Encontrar os limites mínimos e máximos do objeto (Bounding Box)
+    double minX = std::numeric_limits<double>::max();
+    double maxX = std::numeric_limits<double>::lowest();
+    double minY = std::numeric_limits<double>::max();
+    double maxY = std::numeric_limits<double>::lowest();
+    double minZ = std::numeric_limits<double>::max();
+    double maxZ = std::numeric_limits<double>::lowest();
+
+    for (const auto &face : objeto.faces) {
+        for (const QVector3D &p : face) {
+            if (p.x() < minX) minX = p.x();
+            if (p.x() > maxX) maxX = p.x();
+            if (p.y() < minY) minY = p.y();
+            if (p.y() > maxY) maxY = p.y();
+            if (p.z() < minZ) minZ = p.z();
+            if (p.z() > maxZ) maxZ = p.z();
         }
     }
 
-    const double alturaAtual = maximo.y() - minimo.y();
-    if (alturaAtual <= 0.0) {
-        return;
-    }
+    // 2. Calcular o centro geométrico atual do objeto e a sua altura real
+    double centroX = (minX + maxX) / 2.0;
+    double centroY = (minY + maxY) / 2.0;
+    double centroZ = (minZ + maxZ) / 2.0;
+    double alturaReal = maxY - minY;
 
-    const QVector3D centro = (minimo + maximo) / 2.0f;
-    const double fator = altura / alturaAtual;
+    if (alturaReal == 0) alturaReal = 1.0; // Evitar divisão por zero
 
-    const Matriz centralizar = Matriz::translacao(-centro.x(), -centro.y(), -centro.z());
-    const Matriz redimensionar = Matriz::escala(fator, fator, fator);
-    const Matriz posicionar = Matriz::translacao(posicao.x(), posicao.y(), posicao.z());
+    // 3. Calcular o fator de escala necessário para o objeto se adequar à tela
+    double fatorEscala = alturaDesejada / alturaReal;
 
-    objeto.transformar(posicionar * redimensionar * centralizar);
+    // 4. Montar a matriz combinada:
+    //    Translada para a origem -> Aplica Escala -> Translada para a posição central da cena
+    Matriz tParaOrigem = Matriz::translacao(-centroX, -centroY, -centroZ);
+    Matriz e = Matriz::escala(fatorEscala, fatorEscala, fatorEscala);
+    Matriz tParaCena = Matriz::translacao(posicaoDestino.x(), posicaoDestino.y(), posicaoDestino.z());
+
+    // Multiplicação na ordem correta do pipeline de transformações geométricas
+    Matriz transformacaoFinal = tParaCena * (e * tParaOrigem);
+
+    // 5. Aplicar a transformação em todos os vértices do objeto
+    objeto.transformar(transformacaoFinal);
 }
 
 void MainWindow::carregarPokemon(const QString &nomeArquivo,
@@ -185,6 +195,8 @@ void MainWindow::on_btnCarregarObj_clicked()
         QMessageBox::critical(this, "Erro ao carregar OBJ", erro);
         return;
     }
+
+    ajustarModeloParaCena(objeto, QVector3D(400.0, 300.0, 0.0), 350.0);
 
     ui->frame->adicionarObjeto(objeto);
     ui->listWidget->addItem(objeto.nome);
