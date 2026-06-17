@@ -42,7 +42,6 @@ private slots:
     void on_comboProjecao_currentIndexChanged(int index);
 private:
     Ui::MainWindow *ui;
-    void criarCasinha(double x, double y, QString nomeCasa);
     void carregarPokemon(const QString &nomeArquivo,
                          const QString &nomeObjeto,
                          const QVector3D &posicao,

@@ -37,6 +37,9 @@ void MeuFrame::setVistaOrtogonal(VistaOrtogonal vista)
     case VistaOrtogonal::LateralZY:
         matrizProjecao = Matriz::projecaoOrtogonalZY();
         break;
+    case VistaOrtogonal::Perspectiva:
+        matrizProjecao = Matriz::projecaoPerspectiva(500.0);
+        break;
     default:
         matrizProjecao = Matriz::projecaoOrtogonalXY();
         break;
@@ -45,23 +48,31 @@ void MeuFrame::setVistaOrtogonal(VistaOrtogonal vista)
     update();
 }
 
-QPointF MeuFrame::projetarOrtogonal(const QVector3D &ponto) const
+QPointF MeuFrame::projetar(const QVector3D &ponto) const
 {
-    QVector3D deslocamento;
+    // SE FOR MODO PERSPECTIVA
+    if (vistaOrtogonal == VistaOrtogonal::Perspectiva) {
 
-    switch (vistaOrtogonal) {
-    case VistaOrtogonal::SuperiorXZ:
-        deslocamento = QVector3D(0.0, (wYmin + wYmax) / 2.0, 0.0);
-        break;
-    case VistaOrtogonal::LateralZY:
-        deslocamento = QVector3D((wXmin + wXmax) / 2.0, 0.0, 0.0);
-        break;
-    default:
-        break;
+        // 1. Centraliza o ponto em relação ao meio do mundo (400, 300)
+        // e afasta o modelo em Z (+600) para ele não ficar colado na lente da câmera
+        double xc = ponto.x() - 400.0;
+        double yc = ponto.y() - 300.0;
+        double zc = ponto.z() + 600.0;
+
+        QVector3D pontoEspacoCamera(xc, yc, zc);
+
+        // 2. Multiplica pela matriz de perspectiva (executa a divisão por W automaticamente no seu operator*)
+        QVector3D pProjetado = matrizProjecao * pontoEspacoCamera;
+
+        // 3. Devolve o ponto movendo-o de volta para o centro do seu Frame de desenho
+        return QPointF(pProjetado.x() + 400.0, pProjetado.y() + 300.0);
     }
 
-    const QVector3D projetado = matrizProjecao * ponto + deslocamento;
-    return QPointF(projetado.x(), projetado.y());
+    // SE FOR MODO ORTOGONAL (Mantém o seu código original funcionando igualzinho)
+    else {
+        QVector3D pProjetado = matrizProjecao * ponto;
+        return QPointF(pProjetado.x(), pProjetado.y());
+    }
 }
 
 
@@ -86,7 +97,7 @@ void MeuFrame::paintEvent(QPaintEvent *event)
 
             // Tratamento especial para pontos soltos (adaptado para QVector3D)
             if(numPontos == 1) {
-                const QPointF p = projetarOrtogonal(obj.faces[f][0]);
+                const QPointF p = projetar(obj.faces[f][0]);
                 if(calcularCodigo(p) == INSIDE) {
                     painter.drawPoint(mundoParaTela(p));
                 }
@@ -96,8 +107,8 @@ void MeuFrame::paintEvent(QPaintEvent *event)
             for(int j = 0; j < numPontos; j++){
 
                 // Dentro do laço de renderização - Conforme a imagem
-                QPointF p1_mundo = projetarOrtogonal(obj.faces[f][j]);
-                QPointF p2_mundo = projetarOrtogonal(obj.faces[f][(j + 1) % numPontos]);
+                QPointF p1_mundo = projetar(obj.faces[f][j]);
+                QPointF p2_mundo = projetar(obj.faces[f][(j + 1) % numPontos]);
 
                 if (cohenSutherlandClip(p1_mundo, p2_mundo)) {
                     QPoint p1_tela = mundoParaTela(p1_mundo);

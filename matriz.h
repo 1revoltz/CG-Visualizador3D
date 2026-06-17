@@ -23,6 +23,7 @@ public:
     static Matriz projecaoOrtogonalXY();
     static Matriz projecaoOrtogonalXZ();
     static Matriz projecaoOrtogonalZY();
+    static Matriz projecaoPerspectiva(double d);
 };
 
 #endif // MATRIZ_H

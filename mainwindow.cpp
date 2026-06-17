@@ -10,7 +10,6 @@
 #include <QFileInfo>
 #include <QMessageBox>
 
-#include <algorithm>
 #include <limits>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -44,10 +43,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle("Visualizador 3D");
 
-    criarCasinha(100, 100, "Casa 1");
-    criarCasinha(300, 200, "Casa 2");
-    criarCasinha(550, 50, "Casa 3");
-
     carregarPokemon("UmbreonHighPoly.obj",
                     "Umbreon",
                     QVector3D(150.0, 400.0, 0.0),
@@ -71,6 +66,9 @@ void MainWindow::on_comboProjecao_currentIndexChanged(int index)
         break;
     case 2:
         ui->frame->setVistaOrtogonal(MeuFrame::VistaOrtogonal::LateralZY);
+        break;
+    case 3:
+        ui->frame->setVistaOrtogonal(MeuFrame::VistaOrtogonal::Perspectiva);
         break;
     default:
         ui->frame->setVistaOrtogonal(MeuFrame::VistaOrtogonal::FrontalXY);
@@ -371,21 +369,3 @@ void MainWindow::on_btnZoomOut_clicked()
     ui->frame->update();
 }
 
-void MainWindow::criarCasinha(double x, double y, QString nomeCasa)
-{
-    Objeto casa(nomeCasa);
-
-    // Define as partes usando QVector3D com Z = 0.0
-    QList<QVector3D> base = {QVector3D(x, y, 0.0), QVector3D(x + 100, y, 0.0), QVector3D(x + 100, y + 100, 0.0), QVector3D(x, y + 100, 0.0)};
-    QList<QVector3D> teto = {QVector3D(x, y + 100, 0.0), QVector3D(x + 100, y + 100, 0.0), QVector3D(x + 50, y + 150, 0.0)};
-    QList<QVector3D> porta = {QVector3D(x + 20, y, 0.0), QVector3D(x + 50, y, 0.0), QVector3D(x + 50, y + 60, 0.0), QVector3D(x + 20, y + 60, 0.0)};
-
-    // Adiciona as partes para dentro do obj
-    casa.addFace(base);
-    casa.addFace(teto);
-    casa.addFace(porta);
-
-    // Manda pro Frame
-    ui->frame->adicionarObjeto(casa);
-    ui->listWidget->addItem(casa.nome);
-}

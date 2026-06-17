@@ -109,3 +109,16 @@ Matriz Matriz::projecaoOrtogonalZY()
     res.m[3][3] = 1.0;
     return res;
 }
+
+Matriz Matriz::projecaoPerspectiva(double d)
+{
+    Matriz res;
+
+
+    if (d != 0.0) {
+        res.m[3][2] = 1.0 / d;
+    }
+    res.m[3][3] = 0.0;
+
+    return res;
+}

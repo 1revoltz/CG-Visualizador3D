@@ -15,7 +15,8 @@ public:
     enum class VistaOrtogonal {
         FrontalXY,
         SuperiorXZ,
-        LateralZY
+        LateralZY,
+        Perspectiva
     };
 
     //zonas
@@ -47,7 +48,7 @@ private:
     QList<Objeto> displayFile;
     VistaOrtogonal vistaOrtogonal = VistaOrtogonal::FrontalXY;
     Matriz matrizProjecao = Matriz::projecaoOrtogonalXY();
-    QPointF projetarOrtogonal(const QVector3D &ponto) const;
+    QPointF projetar(const QVector3D &ponto) const;
     QPoint mundoParaTela(QPointF ptMundo);
 
     //clipping
