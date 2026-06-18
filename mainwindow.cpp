@@ -369,3 +369,92 @@ void MainWindow::on_btnZoomOut_clicked()
     ui->frame->update();
 }
 
+
+void MainWindow::on_Frente_clicked()
+{
+    Matriz mov = Matriz::translacao(0.0, 0.0, -20.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_tras_clicked()
+{
+    Matriz mov = Matriz::translacao(0.0, 0.0, 20.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_esquerda_clicked()
+{
+    Matriz mov = Matriz::translacao(20.0, 0.0, 0.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_direita_clicked()
+{
+    Matriz mov = Matriz::translacao(-20.0, 0.0, 0.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_cima_clicked()
+{
+    Matriz mov = Matriz::translacao(0.0, -20.0, 0.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_baixo_clicked()
+{
+    Matriz mov = Matriz::translacao(0.0, 20.0, 0.0);
+    ui->frame->transformarMundo(mov);
+}
+
+
+void MainWindow::on_olharEsquerda_clicked()
+{
+    Matriz tIda = Matriz::translacao(-400.0, -300.0, 600.0);
+    Matriz rot = Matriz::rotacaoY(5.0);
+    Matriz tVolta = Matriz::translacao(400.0, 300.0, -600.0);
+
+    Matriz mFinal = tVolta * (rot * tIda);
+    ui->frame->transformarMundo(mFinal);
+}
+
+
+void MainWindow::on_olharDireita_clicked()
+{
+    Matriz tIda = Matriz::translacao(-400.0, -300.0, 600.0);
+    Matriz rot = Matriz::rotacaoY(-5.0);
+    Matriz tVolta = Matriz::translacao(400.0, 300.0, -600.0);
+
+    Matriz mFinal = tVolta * (rot * tIda);
+    ui->frame->transformarMundo(mFinal);
+}
+
+
+void MainWindow::on_olharCima_clicked()
+{
+    // move camera pra origem
+    Matriz tIda = Matriz::translacao(-400.0, -300.0, 600.0);
+    //rotaciona o mundo pra baixo pra olhar pra cima
+    Matriz rot = Matriz::rotacaoX(5.0);
+    //camera volta pro lugar dela
+    Matriz tVolta = Matriz::translacao(400.0, 300.0, -600.0);
+
+    Matriz mFinal = tVolta * (rot * tIda);
+    ui->frame->transformarMundo(mFinal);
+}
+
+
+void MainWindow::on_olharBaixo_clicked()
+{
+    Matriz tIda = Matriz::translacao(-400.0, -300.0, 600.0);
+    Matriz rot = Matriz::rotacaoX(-5.0);
+    Matriz tVolta = Matriz::translacao(400.0, 300.0, -600.0);
+
+    Matriz mFinal = tVolta * (rot * tIda);
+    ui->frame->transformarMundo(mFinal);
+}
+

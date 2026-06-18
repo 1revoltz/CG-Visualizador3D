@@ -104,9 +104,9 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-203</y>
+          <y>-559</y>
           <width>216</width>
-          <height>1430</height>
+          <height>1786</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -452,6 +452,149 @@
              </widget>
             </item>
            </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_6">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>350</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Controles de Câmera</string>
+           </property>
+           <widget class="QPushButton" name="Frente">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>20</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Frente</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="tras">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>50</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Trás</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="esquerda">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>80</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Esquerda</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="direita">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>110</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Direita</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cima">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>140</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Cima</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="baixo">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>170</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Baixo</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="olharEsquerda">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>200</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para a esquerda</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="olharDireita">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>230</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para a direita</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="olharCima">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>260</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para cima</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="olharBaixo">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>290</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para baixo</string>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>

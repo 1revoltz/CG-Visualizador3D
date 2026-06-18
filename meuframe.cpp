@@ -75,6 +75,14 @@ QPointF MeuFrame::projetar(const QVector3D &ponto) const
     }
 }
 
+void MeuFrame::transformarMundo(const Matriz &m)
+{
+    for (int i = 0; i < displayFile.size(); ++i) {
+        displayFile[i].transformar(m);
+    }
+
+    update();
+}
 
 void MeuFrame::paintEvent(QPaintEvent *event)
 {

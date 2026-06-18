@@ -32,6 +32,7 @@ public:
 
     Objeto *getObjeto(int index);
     void setVistaOrtogonal(VistaOrtogonal vista);
+    void transformarMundo(const Matriz &m);
 
     double wXmin, wXmax, wYmin, wYmax;
 

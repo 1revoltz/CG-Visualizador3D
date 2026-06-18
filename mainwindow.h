@@ -40,6 +40,26 @@ private slots:
     void on_btnZoomOut_clicked();
     void on_btnCarregarObj_clicked();
     void on_comboProjecao_currentIndexChanged(int index);
+    void on_Frente_clicked();
+
+    void on_tras_clicked();
+
+    void on_esquerda_clicked();
+
+    void on_direita_clicked();
+
+    void on_cima_clicked();
+
+    void on_baixo_clicked();
+
+    void on_olharEsquerda_clicked();
+
+    void on_olharDireita_clicked();
+
+    void on_olharCima_clicked();
+
+    void on_olharBaixo_clicked();
+
 private:
     Ui::MainWindow *ui;
     void carregarPokemon(const QString &nomeArquivo,
