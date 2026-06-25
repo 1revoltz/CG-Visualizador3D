@@ -2,7 +2,7 @@
 #define OBJETO_H
 
 #include <QList>
-#include <QVector3D> // incluido para aceitar coordenadas 3d
+#include <QVector3D> 
 #include <QString>
 #include "matriz.h"
 

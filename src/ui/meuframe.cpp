@@ -298,17 +298,17 @@ QPoint MeuFrame::mundoParaTela(QPointF ptMundo) {
     double xw = ptMundo.x();
     double yw = ptMundo.y();
 
-    // Pequena verificação para evitar divisão por zero se a window tiver tamanho zero
+    //verificação para evitar divisão por zero se a window tiver tamanho zero
     if (wXmax == wXmin) wXmax += 1;
     if (wYmax == wYmin) wYmax += 1;
 
-    // Fórmula da Transformação de Viewport (X)
+    // fórmula da Transformação de Viewport (X)
     double xvp = ((xw - wXmin) / (wXmax - wXmin)) * (vpXmax - vpXmin) + vpXmin;
 
-    // Fórmula da Transformação de Viewport (Y) - Invertemos com (1 - ...) porque o Y da tela cresce para baixo
+    // fórmula da Transformação de Viewport (Y)
     double yvp = (1.0 - (yw - wYmin) / (wYmax - wYmin)) * (vpYmax - vpYmin) + vpYmin;
 
-    // Retorna o ponto convertido arredondado para inteiros (pixels)
+    // retorna o ponto convertido arredondado para inteiros (pixels)
     return QPoint(std::round(xvp), std::round(yvp));
 }
 

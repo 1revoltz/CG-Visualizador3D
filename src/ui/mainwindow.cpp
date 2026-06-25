@@ -117,7 +117,7 @@ void MainWindow::ajustarModeloParaCena(Objeto &objeto, const QVector3D &posicaoD
 {
     if (objeto.faces.isEmpty()) return;
 
-    // 1. Encontrar os limites mínimos e máximos do objeto (Bounding Box)
+    //encontrar os limites mínimos e máximos do objeto
     double minX = std::numeric_limits<double>::max();
     double maxX = std::numeric_limits<double>::lowest();
     double minY = std::numeric_limits<double>::max();
@@ -136,27 +136,26 @@ void MainWindow::ajustarModeloParaCena(Objeto &objeto, const QVector3D &posicaoD
         }
     }
 
-    // 2. Calcular o centro geométrico atual do objeto e a sua altura real
+    // calcular o centro geométrico atual do objeto e a altura real
     double centroX = (minX + maxX) / 2.0;
     double centroY = (minY + maxY) / 2.0;
     double centroZ = (minZ + maxZ) / 2.0;
     double alturaReal = maxY - minY;
 
-    if (alturaReal == 0) alturaReal = 1.0; // Evitar divisão por zero
+    if (alturaReal == 0) alturaReal = 1.0; // evita divisão por zero
 
-    // 3. Calcular o fator de escala necessário para o objeto se adequar à tela
+    //calcular o fator de escala necessário para o objeto se adequar na tela
     double fatorEscala = alturaDesejada / alturaReal;
 
-    // 4. Montar a matriz combinada:
-    //    Translada para a origem -> Aplica Escala -> Translada para a posição central da cena
+    // montar a matriz:
     Matriz tParaOrigem = Matriz::translacao(-centroX, -centroY, -centroZ);
     Matriz e = Matriz::escala(fatorEscala, fatorEscala, fatorEscala);
     Matriz tParaCena = Matriz::translacao(posicaoDestino.x(), posicaoDestino.y(), posicaoDestino.z());
 
-    // Multiplicação na ordem correta do pipeline de transformações geométricas
+    // multiplicação na ordem correta do pipeline de transformações geométricas
     Matriz transformacaoFinal = tParaCena * (e * tParaOrigem);
 
-    // 5. Aplicar a transformação em todos os vértices do objeto
+    //aplica a transformação em todos os vértices do objeto
     objeto.transformar(transformacaoFinal);
 }
 
@@ -364,7 +363,7 @@ void MainWindow::on_btnRotacionar_clicked()
     ui->visualizadorFrame->update();
 }
 
-// --- CONTROLES DE PAN (Mover a câmera) ---
+// --- CONTROLES DE CAMERA ---
 
 void MainWindow::on_btnWinCima_clicked()
 {
