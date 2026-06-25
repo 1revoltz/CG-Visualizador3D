@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1254</width>
+    <height>1308</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <widget class="MeuFrame" name="visualizadorFrame">
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1254</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="minimumSize">
+    <size>
+     <width>150</width>
+     <height>38</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>Painel de Objetos</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <widget class="QListWidget" name="listaObjetos">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>131</width>
+       <height>490</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnCarregarObj">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>510</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Carregar OBJ</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <property name="minimumSize">
+    <size>
+     <width>250</width>
+     <height>400</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>Painel de Controle</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-559</y>
+          <width>216</width>
+          <height>1786</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Translação</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editY"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelTranslacaoZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editZ"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnTranslacao">
+              <property name="text">
+               <string>Transladar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Escalonamento</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaY"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelEscalaZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editEscalaZ"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnEscalar">
+              <property name="text">
+               <string>Escalar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="title">
+            <string>Rotação</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Angulo:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editAngulo"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelEixoRotacao">
+              <property name="text">
+               <string>Eixo de rotação:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboEixoRotacao">
+              <item>
+               <property name="text">
+                <string>X</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Y</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Z</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioCentroide">
+              <property name="text">
+               <string>Girar no centroide</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioPontoFixo">
+              <property name="text">
+               <string>Girar em ponto fixo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotX"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotY"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelPivotZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="editPivotZ"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnRotacionar">
+              <property name="text">
+               <string>Rotacionar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="title">
+            <string>Controles da Window</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QPushButton" name="btnWinCima">
+              <property name="text">
+               <string>Cima</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinBaixo">
+              <property name="text">
+               <string>Baixo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinDireita">
+              <property name="text">
+               <string>Direita</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnWinEsquerda">
+              <property name="text">
+               <string>Esquerda</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnZoomIn">
+              <property name="text">
+               <string>Zoom IN</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnZoomOut">
+              <property name="text">
+               <string>Zoom Out</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxProjecao">
+           <property name="title">
+            <string>Projeção Ortogonal</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayoutProjecao">
+            <item>
+             <widget class="QLabel" name="labelProjecao">
+              <property name="text">
+               <string>Plano de visualização:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboProjecao">
+              <item>
+               <property name="text">
+                <string>Frontal (XY)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Superior (XZ)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lateral (ZY)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Perspectiva</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_5">
+           <property name="title">
+            <string>Controles de Viewport</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>X min</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinVpXMin">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Y min</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinVpYMin">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>X max</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinVpXMax">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Y max</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinVpYMax">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_6">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>350</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Controles de Câmera</string>
+           </property>
+           <widget class="QPushButton" name="btnCameraFrente">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>20</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Frente</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnCameraTras">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>50</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Trás</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnCameraEsquerda">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>80</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Esquerda</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnCameraDireita">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>110</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Direita</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnCameraCima">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>140</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Cima</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnCameraBaixo">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>170</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Câmera para Baixo</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnOlharEsquerda">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>200</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para a esquerda</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnOlharDireita">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>230</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para a direita</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnOlharCima">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>260</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para cima</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnOlharBaixo">
+            <property name="geometry">
+             <rect>
+              <x>12</x>
+              <y>290</y>
+              <width>174</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Olhar para baixo</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MeuFrame</class>
+   <extends>QFrame</extends>
+   <header>meuframe.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

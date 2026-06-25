@@ -1,2 +1,22 @@
+# Qt Creator local settings
 *.user
+*.user.*
+.qtcreator/
+
+# Build outputs
 build/
+build-*/
+debug/
+release/
+Makefile*
+*.o
+*.exe
+
+# Qt generated files
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+.qmake.stash
+
+# Local/generated analysis files
+tmp/
