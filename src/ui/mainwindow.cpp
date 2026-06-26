@@ -257,6 +257,13 @@ void MainWindow::on_btnCarregarObj_clicked()
         5000);
 }
 
+void MainWindow::on_btnLimparTela_clicked()
+{
+    ui->visualizadorFrame->limparObjetos();
+    ui->listaObjetos->clear();
+    ui->statusbar->showMessage("Tela limpa", 5000);
+}
+
 bool MainWindow::lerCampoNumerico(QLineEdit *campo, const QString &nomeCampo, double &valor)
 {
     if (converterDoubleEntrada(campo->text(), valor)) {

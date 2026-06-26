@@ -41,6 +41,7 @@ private slots:
     void on_btnZoomIn_clicked();
     void on_btnZoomOut_clicked();
     void on_btnCarregarObj_clicked();
+    void on_btnLimparTela_clicked();
     void on_comboProjecao_currentIndexChanged(int index);
     void on_btnCameraFrente_clicked();
 

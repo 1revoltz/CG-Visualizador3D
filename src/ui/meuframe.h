@@ -29,6 +29,7 @@ public:
     explicit MeuFrame(QWidget *parent = nullptr);
 
     void adicionarObjeto(Objeto obj);
+    void limparObjetos();
 
     Objeto *getObjeto(int index);
     void setVistaOrtogonal(VistaOrtogonal vista);
