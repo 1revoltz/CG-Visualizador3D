@@ -6,6 +6,8 @@
 
 #include "objeto.h"
 
+class QLineEdit;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -71,6 +73,9 @@ private:
                                const QVector3D &posicao,
                                double altura);
     void ajustarZoomWindow(double zoom);
+    bool lerCampoNumerico(QLineEdit *campo,
+                          const QString &nomeCampo,
+                          double &valor);
     QString localizarArquivoDoProjeto(const QString &nomeArquivo) const;
 };
 #endif // MAINWINDOW_H
