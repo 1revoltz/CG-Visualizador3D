@@ -75,6 +75,19 @@
       <string>Carregar OBJ</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="btnLimparTela">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>550</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Limpar Tela</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "leitorobj.h"
 #include "matriz.h"
+#include "numeros.h"
 #include "objeto.h"
 #include "ui_mainwindow.h"
 
@@ -256,6 +257,28 @@ void MainWindow::on_btnCarregarObj_clicked()
         5000);
 }
 
+void MainWindow::on_btnLimparTela_clicked()
+{
+    ui->visualizadorFrame->limparObjetos();
+    ui->listaObjetos->clear();
+    ui->statusbar->showMessage("Tela limpa", 5000);
+}
+
+bool MainWindow::lerCampoNumerico(QLineEdit *campo, const QString &nomeCampo, double &valor)
+{
+    if (converterDoubleEntrada(campo->text(), valor)) {
+        return true;
+    }
+
+    QMessageBox::warning(
+        this,
+        "Valor invalido",
+        QString("Informe um numero valido para %1.").arg(nomeCampo));
+    campo->setFocus();
+    campo->selectAll();
+    return false;
+}
+
 void MainWindow::on_btnTranslacao_clicked()
 {
     int index = ui->listaObjetos->currentRow();
@@ -283,9 +306,22 @@ void MainWindow::on_btnEscalar_clicked()
     if (!obj)
         return;
 
-    double sx = ui->editEscalaX->text().toDouble();
-    double sy = ui->editEscalaY->text().toDouble();
-    double sz = ui->editEscalaZ->text().toDouble();
+    double sx = 1.0;
+    double sy = 1.0;
+    double sz = 1.0;
+    if (!lerCampoNumerico(ui->editEscalaX, "Escala X", sx) ||
+        !lerCampoNumerico(ui->editEscalaY, "Escala Y", sy) ||
+        !lerCampoNumerico(ui->editEscalaZ, "Escala Z", sz)) {
+        return;
+    }
+
+    if (sx == 0.0 || sy == 0.0 || sz == 0.0) {
+        QMessageBox::warning(
+            this,
+            "Escalonamento invalido",
+            "Fator 0 colapsa o objeto. Use valores entre 0 e 1 para reduzir o tamanho.");
+        return;
+    }
 
     QVector3D centro = obj->getCentroide();
 

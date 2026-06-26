@@ -29,6 +29,12 @@ void MeuFrame::adicionarObjeto(Objeto obj){
     update();
 }
 
+void MeuFrame::limparObjetos()
+{
+    displayFile.clear();
+    update();
+}
+
 void MeuFrame::setVistaOrtogonal(VistaOrtogonal vista)
 {
     vistaOrtogonal = vista;

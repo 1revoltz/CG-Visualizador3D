@@ -12,6 +12,7 @@ SOURCES += \
     src/main.cpp \
     src/core/leitorobj.cpp \
     src/core/matriz.cpp \
+    src/core/numeros.cpp \
     src/core/objeto.cpp \
     src/ui/mainwindow.cpp \
     src/ui/meuframe.cpp
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     src/core/leitorobj.h \
     src/core/matriz.h \
+    src/core/numeros.h \
     src/core/objeto.h \
     src/ui/mainwindow.h \
     src/ui/meuframe.h
