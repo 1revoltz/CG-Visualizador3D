@@ -5,7 +5,7 @@ Trabalho da disciplina de **Computação Gráfica** (Ciência da Computação, U
 Visualizador de modelos 3D em C++ com Qt, com todo o pipeline gráfico implementado à mão: transformações com matrizes homogêneas, projeções, recorte (clipping) e transformação window–viewport. Nenhuma biblioteca gráfica 3D (OpenGL, etc.) é usada para desenhar: o Qt só desenha as linhas finais na tela.
 
 <!-- Adicione um print do programa rodando: salve em docs/print.png e descomente a linha abaixo -->
-<!-- ![Visualizador 3D](docs/print.png) -->
+![Visualizador 3D](print.png)
 
 ## Funcionalidades
 
